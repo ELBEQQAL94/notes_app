@@ -3,15 +3,20 @@
 ## Authentication:
 * [ ] form-based
     * [x] Create server
-    * [ ] add auth router
-    * [ ] Create user with POST /auth/signup
-        * [ ] valid required fields
+    * [x] add auth router
+    * [x] create data base with mongoDB atlas
+    * [x] add config folder
+    * [x] connect to mongose
+    * [x] add mongose schema
+    * [x] Create user with POST /auth/signup
+        * [x] valid required fields
+        * [x] Check if username is unique
         * [ ] Check if email is unique
-        * [ ] hash password with bcrypt
-        * [ ] inserto into db
-        * [ ] 
+        * [x] hash password with bcrypt
+        * [x] inserto into db 
     * [ ] Login user with POST /auth/login
         * [ ] check if email in db
+        * [ ] check if username in db
         * [ ] compare password with hash hashed password in db
         * [ ] Create and sign a JWT
             * [ ] respond with JWT
@@ -38,4 +43,5 @@
 * [ ] verification user email if real: 
     [`https://stackoverflow.com/questions/39092822/how-to-do-confirm-email-address-with-express-node`]
 
-### Deploy app ['heroku', 'netlify']
+### Deploy app
+* [ ] heroku
