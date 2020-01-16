@@ -14,6 +14,21 @@
         * [ ] Check if email is unique
         * [x] hash password with bcrypt
         * [x] inserto into db 
+    * [x] Create landing page
+        * [x] Link to sign up page
+    * [x] Create Sign Up Page
+        * [x] Form with: username and password
+        * [x] when form is submitted
+            * [x] validate username
+                * [x] display errors
+            * [x] validate password
+                * [x] display errors
+            * [x] validate confirm password
+                * [x] display errors
+            * [x] POST request to the server
+                * [x] Display errors
+                * [x] If succesful sign up
+                    * [x] Redirect to login page
     * [ ] Login user with POST /auth/login
         * [ ] check if email in db
         * [ ] check if username in db
@@ -45,3 +60,5 @@
 
 ### Deploy app
 * [ ] heroku
+
+### TESTS [`server`, `client`]

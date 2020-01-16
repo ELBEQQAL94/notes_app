@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Gelasio&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: rgb(37, 46, 37);
+    color: #ffffff;
+    height: 3000px
+}
+
+a { 
+    text-decoration: none !important; 
+    color: #ffffff !important
+}
+
+/* ACTIVE LINK */
+.active {
+    background: rgb(37, 46, 37);
+    padding: 1vmin;
+    border: 1px dashed #ffffff;
+}
+
+/* HEADER */
+header {
+    background: aqua;
+    padding: 4vmin;
+}
+
+header .brand {
+    color: orangered !important;
+    font-size: 6vmin;
+    font-family: 'Gelasio', serif;
+}
+
+header .link_router {
+    margin: 5vmin 0;
+    font-size: 3vmin;
+    text-transform: uppercase;
+    transition: all .5s linear;
+}
+
+header .link_router:hover {
+    color: black !important;   
+}
+
+.nav-item {
+    margin-top: 3vmin ;
+}
+
+/* JUMBOTRON */
+.jumbotron {
+    color: #ffffff;
+    background: transparent;
+}
+
+.landing_page_btn {
+    background: aqua;
+    border: 1px dashed;
+    transition: all .5s linear;
+}
+
+/* SIGNUP SECTION */
+.signup_section {
+    margin: 4vmin 0;
+    width: 89vw;
+    height: 100vh;
+}
+
+.signup_section .signup_form {
+    border: 2px solid;
+    width: 80vmin;
+    padding: 3vmin;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 10px 10px rgb(84, 85, 84);
+}
