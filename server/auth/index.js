@@ -63,4 +63,37 @@ router.post('/signup', (req, res, next) => {
     
 });
 
+// POST /auth/signup
+router.post('/login', (req, res, next) => {
+
+    const { username, password } = req.body;
+
+    const result = Joi.validate(req.body, schema);
+
+    if(result.error === null) {
+
+        User.findOne({ username }, function (err, user) {
+
+            if(err) {
+                next(err);
+            };
+    
+            // check user is in database
+            if(user){
+                res.status(200).json(user);
+            } else {
+                // user not existe
+                res.status(422);
+                const error = new Error(`${username} Not Found.`);
+                next(error);
+            } 
+        });
+
+    } else {
+        res.status(422);
+        const error = new Error('Unable to login.');
+        next(error);
+    }
+});
+
 module.exports = router;

@@ -1,7 +1,7 @@
 ### authentication based on JWT-based to a Node/Express/Mongo app.
 
 ## Authentication:
-* [ ] form-based
+* [x] form-based
     * [x] Create server
     * [x] add auth router
     * [x] create data base with mongoDB atlas
@@ -29,9 +29,10 @@
                 * [x] Display errors
                 * [x] If succesful sign up
                     * [x] Redirect to login page
-    * [ ] Login user with POST /auth/login
+    * [x] Login user with POST /auth/login
+        * [x] validate user info
         * [ ] check if email in db
-        * [ ] check if username in db
+        * [x] check if username in db
         * [ ] compare password with hash hashed password in db
         * [ ] Create and sign a JWT
             * [ ] respond with JWT
