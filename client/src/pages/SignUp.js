@@ -42,7 +42,6 @@ const SignUp = () => {
       axios
         .post(SIGNUP_URL, data)
         .then(res => {
-          console.log('response data: ', res.data);
           setRedirect(true);
         })
         .catch(err => {
@@ -56,7 +55,7 @@ const SignUp = () => {
   };
 
   // redirect to login page if singn up successful
-  if(redirect) return <Redirect to="/login" />;
+  if(redirect) return <Redirect to="/dashboard" />;
 
   return (
     <Container>

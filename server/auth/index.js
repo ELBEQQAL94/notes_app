@@ -3,6 +3,13 @@ const router = express.Router();
 const Joi = require('joi');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const { display422 } = require('../helpers');
+const jwt = require('jsonwebtoken');
+const config = require('config');
+
+// secret code
+const secret = config.get('jwtSecrete');
+
 
 const schema = Joi.object({
     username: Joi.string()
@@ -34,9 +41,7 @@ router.post('/signup', (req, res, next) => {
     
             // make username is unique
             if(user){
-                const error = new Error(`${username} is already token.`);
-                next(error);
-
+                display422(res, next, `${username} is already token.`);
             } else {        
                 // hash password before save it
                 // Auto-gen a salt and hash
@@ -80,12 +85,31 @@ router.post('/login', (req, res, next) => {
     
             // check user is in database
             if(user){
-                res.status(200).json(user);
+                // compare password
+                bcrypt.compare(password, user.password).then(result => {
+                    // if result is true, the password is correct
+                    if(result){
+                        // create token for user
+                        const payload = {
+                            _id: user._id,
+                            username: user.username
+                        };
+                        // sign Token
+                        jwt.sign(payload, secret, { expiresIn: '1d' }, (err, token) => {
+                            if(err){
+                                display422(res, next, "You couldn't create TOKEN.");
+                            }
+                            
+                            res.json({token});
+                        });
+                    } else {
+                        // else return error
+                        display422(res, next, 'Password is incorrect.');
+                    }
+                });
             } else {
                 // user not existe
-                res.status(422);
-                const error = new Error(`${username} Not Found.`);
-                next(error);
+                display422(res, next, `${username} Not Found.`);
             } 
         });
 

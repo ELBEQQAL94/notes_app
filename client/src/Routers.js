@@ -1,11 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PrivateRoutes from './PrivateRoutes';
+import PublicRoutes from './PublicRoutes';
 
-// public pages
+// Public Pages
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
+import LogIn from "./pages/LogIn";
+
+// Private Pages
+import Dashboard from './pages/Dashboard';
+
 import PageNotFound from "./pages/PageNotFound";
 
 const Routers = () => {
@@ -13,9 +19,10 @@ const Routers = () => {
     <Router>
       <Header />
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/login" component={Login} />
+        <PublicRoutes restricted={false} component={Home} path="/" exact />
+        <PublicRoutes restricted={true} component={SignUp} path="/signup" exact />
+        <PublicRoutes restricted={true} component={LogIn} path="/login" exact />
+        <PrivateRoutes component={Dashboard} path="/dashboard" exact />
         <Route path="*" component={PageNotFound} />
       </Switch>
     </Router>

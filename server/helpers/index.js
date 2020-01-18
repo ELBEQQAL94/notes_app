@@ -14,7 +14,15 @@ function errorHandler(err, req, res, next){
     });
 };
 
+// display 422 error
+function display422(res, next, message){
+    res.status(422); 
+    const error = new Error(message);
+    next(error);
+};
+
 module.exports = {
     notFound,
-    errorHandler
+    errorHandler,
+    display422
 };

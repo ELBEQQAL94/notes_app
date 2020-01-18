@@ -30,6 +30,9 @@ const Header = () => {
             <NavItem>
               <CustomLink to="/signup" label="SIGN UP" />
             </NavItem>
+            <NavItem>
+              <CustomLink to="/login" label="Log In" />
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
