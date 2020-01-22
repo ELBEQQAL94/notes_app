@@ -79,3 +79,29 @@ header .link_router:hover {
     justify-content: center;
     box-shadow: 0 10px 10px rgb(84, 85, 84);
 }
+
+/* DASHBOARD */
+.dashboard {
+    margin: 10px 0;
+    padding: 7vmin;
+}
+
+/* NOTES */
+.notes {
+    margin: 10px 0;
+    padding: 7vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.spinner_in_notes {
+    width: 98vw;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    color: black
+}

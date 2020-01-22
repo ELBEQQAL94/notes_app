@@ -2,9 +2,11 @@ const express = require('express');
 const morgan = require('morgan');
 const {notFound, errorHandler} = require('./helpers');
 const auth = require('./auth');
+const notes = require('./api/notes');
 const config = require('config');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { checkTokenSetUser, IsLoogedIn } = require('./auth/middleware');
 
 // init app
 const app = express();
@@ -17,17 +19,20 @@ app.use(cors({
     origini: 'http://localhost:3000'
 }));
 app.use(express.json()); //Used to parse JSON bodies
-
+app.use(checkTokenSetUser);
 
 // routes
 app.get('/', (req, res) => {
+    const { user } = req;
     res.json({
-        message: 'Hellow World!'
+        message: 'Hellow World!',
+        user
     });
 });
 
 
 app.use('/auth', auth);
+app.use('/api/v1/notes', IsLoogedIn, notes);
 
 app.use(notFound);
 app.use(errorHandler);

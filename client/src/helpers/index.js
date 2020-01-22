@@ -31,6 +31,19 @@ const login_schema = Joi.object({
     .required()
 });
 
+
+// NOTE  SCHEMA
+const note_schema = Joi.object({
+    title: Joi.string()
+      .trim()
+      .min(3)
+      .max(200)
+      .required(),
+    description: Joi.string()
+      .trim()
+      .required()
+});
+
 export const checkComparePassword = user => {
 
     const result = Joi.validate(user, signup_schema);
@@ -68,6 +81,21 @@ export const logout = () => {
 export const loginValidate = user => {
 
     const result = Joi.validate(user, login_schema);
+    let isError = false;
+  
+    if (result.error !== null) {
+        isError = true;
+        return result.error.details[0].message;  
+    } 
+
+    return isError;
+
+};
+
+
+export const noteValidate = note => {
+
+    const result = Joi.validate(note, note_schema);
     let isError = false;
   
     if (result.error !== null) {

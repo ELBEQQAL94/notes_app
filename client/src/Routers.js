@@ -11,6 +11,7 @@ import LogIn from "./pages/LogIn";
 
 // Private Pages
 import Dashboard from './pages/Dashboard';
+import Notes from './pages/Notes';
 
 import PageNotFound from "./pages/PageNotFound";
 
@@ -23,6 +24,7 @@ const Routers = () => {
         <PublicRoutes restricted={true} component={SignUp} path="/signup" exact />
         <PublicRoutes restricted={true} component={LogIn} path="/login" exact />
         <PrivateRoutes component={Dashboard} path="/dashboard" exact />
+        <PrivateRoutes component={Notes} path="/dashboard/notes" />
         <Route path="*" component={PageNotFound} />
       </Switch>
     </Router>

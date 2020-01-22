@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 // page not found
 function notFound(req, res, next){
     res.status(404);
@@ -21,8 +23,27 @@ function display422(res, next, message){
     next(error);
 };
 
+// create token send response
+// sign Token
+function createTokenSendResponse(user, secret, res, next, message){
+    // create token for user
+    const payload = {
+        _id: user._id,
+        username: user.username
+    };
+
+    jwt.sign(payload, secret, { expiresIn: '1d' }, (err, token) => {
+        if(err){
+            display422(res, next, message);
+        }
+        
+        res.json({token});
+    });
+};
+
 module.exports = {
     notFound,
     errorHandler,
-    display422
+    display422,
+    createTokenSendResponse
 };

@@ -28,7 +28,7 @@ const LogIn = () => {
     setError("");
   };
 
-  const handleSubmit = e => {
+  const handleLogin = e => {
     e.preventDefault();
     if (!loginValidate(user)) {
       // send data to server
@@ -64,7 +64,7 @@ const LogIn = () => {
       <section className="signup_section">
         <h1>Log In</h1>
         <hr />
-        <Form className="signup_form" onSubmit={handleSubmit}>
+        <Form className="signup_form" onSubmit={handleLogin}>
           {error.length > 0 ? <ErrorMessage message={error} /> : null}
           <FormGroup>
             <Label for="username">Username</Label>

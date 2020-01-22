@@ -29,7 +29,7 @@ const SignUp = () => {
     setError("");
   };
 
-  const handleSubmit = e => {
+  const handleSignUp = e => {
     e.preventDefault();
     if (!checkComparePassword(user)) {
       // send data to server
@@ -42,6 +42,9 @@ const SignUp = () => {
       axios
         .post(SIGNUP_URL, data)
         .then(res => {
+          // store TOKEN in localStorage
+          localStorage.token = res.data.token;
+          // redirect user to Dashboard
           setRedirect(true);
         })
         .catch(err => {
@@ -62,7 +65,7 @@ const SignUp = () => {
       <section className="signup_section">
         <h1>Sign Up</h1>
         <hr />
-        <Form className="signup_form" onSubmit={handleSubmit}>
+        <Form className="signup_form" onSubmit={handleSignUp}>
           {error.length > 0 ? <ErrorMessage message={error} /> : null}
           <FormGroup>
             <Label for="username">Username</Label>

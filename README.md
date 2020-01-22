@@ -61,32 +61,65 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 
 * [x] If non looged in user visits the dashboard, redirect to the login page
 
-* [ ] Show Username on Dashboard
+* [ ] If logged in show:
 
-* [ ] after sign up, immediatly login
+    * [x] Show Username on Dashboard
 
-* [ ] Have one protected route in the backend
-    * [ ] Only looged in user can request this route
+    * [x] after sign up, immediatly login
+
+    * [x] show log out button in header
+
+    * [ ] Show user icon and username in header
+
+* [x] Have one protected route in the backend
+    * [x] Only looged in user can request this route
 
 ## Authorization:
-* [ ] visitors can only see the homepage
-    * [ ] IsLoogedIn Middleware
-        * [ ] Validate JWT in header
-            * [ ] set req.user to JWT payload
-        * [ ] send unauthorized error message
-    * [ ] redirect to login form
-* [ ] Looged in users can only see their page
-    * [ ] Allowaccess middleware
-        * [ ] id in url must match id in req.user
-        * [ ] send an authorized error message
-    * [ ] redirect to user page if they visit the homepage
-        * [ ] set user._id in localStorage after login/signup
-    * [ ] Add GET /auth/logout to clear user._id cookie
-        * [ ] redirect to login page
+* [x] visitors can only see the homepage
+    * [x] checkTokenSetUser middleware
+        * [x] get TOKEN for Authorization header
+            * [x] if defined -----
+                * [x] Verify the Token with token secret
+                * [x] Set req.user to be the decoded verified payload
+            * [x] else - move along
+    * [x] IsLoogedIn Middleware
+        * [x] if req.user is set - move along
+        * [x] else - send unauthorized error message
+    * [x] redirect to login form
+* [x] Looged in users can only see their page
+* [x] Create notes form on client
+    * [x]  Title
+    * [x] Description
+* [x] POST /api/v1/notes
+    * [x] Must be logged in
+    * [x] Logged in users can create notes
+        * [x] Title
+        * [x] Description -- markdown
+        * [x] Set user._id on server with Logged in users id
+* [x] Get /api/v1/notes
+    * [x] Must be logged in
+    * [x] Logged in users can request all notes
+        * [x] Get all notes in DB with logged in users user_id
+* [x] List all notes with client
+    * [ ] render description with markdown
 
 ## Stretch
 
 * [ ] Use redis for cach request from the client
+
+* [ ] Password reset with email
+
+* [ ] Forgot password email
+    * [ ] Reset with email
+    * [ ] Reset by answering security questions
+
+* [ ] Sort notes by date created
+
+* [ ] Add redux
+
+* [ ] Create editor for description note.
+
+* [ ] Recreate the header.
 
 * [ ] OAuth
     * Login/Signup with google/facebook/twitter/insagrame
@@ -101,11 +134,32 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 * [ ] Rate limiting
     * [ ] Prevent brute force logins
     * [ ] Lock out account after too many login attempts
+    * [ ] Add reCaptcha for signup/logins
 
 * [ ] verification user email if real: 
     [`https://stackoverflow.com/questions/39092822/how-to-do-confirm-email-address-with-express-node`]
 
-### Deploy app
+* [x] hidden SignUp and Login link whene user is SignUp/LogIn. just show him ability to logout.
+
+* [ ] In the home page when you SignUp/LogIn, button in the homepage should go to dashboard page.
+
+
+
+### To Do For Deploy Server On Heroku
 * [ ] heroku
 
-### TESTS [`server`, `client`]
+### To Do For Deploy Client On Netlify
+
+### To Deploy everything on the same heroku instance
+* [ ] Move the server package.json to the root of the folder
+* [ ] Update start script for server to be a relative path
+* [ ] post-deploy script that will build reactjs app
+* [ ] Add a static serve to the server that serves '../client/build'
+* [ ] Environment variables for DB connection and token secret
+
+
+### TESTS [`server`, `client`] Mocha && Jest
+
+* Test each component with jest.
+
+* Test server using Mocha
