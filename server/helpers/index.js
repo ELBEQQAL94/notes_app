@@ -29,7 +29,8 @@ function createTokenSendResponse(user, secret, res, next, message){
     // create token for user
     const payload = {
         _id: user._id,
-        username: user.username
+        username: user.username,
+        role: user.role
     };
 
     jwt.sign(payload, secret, { expiresIn: '1d' }, (err, token) => {

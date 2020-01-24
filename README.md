@@ -1,13 +1,17 @@
-### DESCRIPTION
+### Description
+-----
 Authentication based on JWT-based to a Node/Express/Mongo app.
 
 ### Back End
+-----
 * http://localhost:8080
 
 ### Front End
+-----
 * http://localhost:3000
 
-## Authentication:
+### Authentication:
+-----
 * [x] form-based
     * [x] Create server
     * [x] add auth router
@@ -74,7 +78,8 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 * [x] Have one protected route in the backend
     * [x] Only looged in user can request this route
 
-## Authorization:
+### Authorization:
+------
 * [x] visitors can only see the homepage
     * [x] checkTokenSetUser middleware
         * [x] get TOKEN for Authorization header
@@ -103,7 +108,15 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 * [x] List all notes with client
     * [ ] render description with markdown
 
-## Stretch
+### Stretch
+------
+* [ ] In the home page when you SignUp/LogIn, button in the homepage should go to dashboard page.
+
+* [ ] Create logo for the app
+
+* [ ] Store TOKEN in cookie
+
+* [ ] Add controller folder and move all routes code on it
 
 * [ ] Use redis for cach request from the client
 
@@ -124,7 +137,21 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 * [ ] OAuth
     * Login/Signup with google/facebook/twitter/insagrame
 
-## Admin page:
+* [ ] Add avatar to user profile
+
+* [ ] Add user profile page conatin all information about  the user
+    * [ ] avatar
+    * [ ] username
+    * [ ] email
+    * [ ] reset_password
+    * [ ] social media links
+    * [ ] role...
+* [ ] Add status 200 to all successful response
+* [ ] Refactore the error message
+
+### Admin page:
+------
+
 * [ ] Admin page that lists all users
     * [ ] admin table with user_id
     * [ ] de-activate users
@@ -141,25 +168,70 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 
 * [x] hidden SignUp and Login link whene user is SignUp/LogIn. just show him ability to logout.
 
-* [ ] In the home page when you SignUp/LogIn, button in the homepage should go to dashboard page.
+### BACKEND ADMINISTRATION
+------
+
+* [x] Route to list all users
+    * [x] GET /api/v1/users
+
+* [x] Route to update the user
+    * [x] PUT /api/v1/users/:id
+
+* [ ] Route to delete all users
+    * [ ] DELETE /api/v1/users/:id
+
+* [ ] Route to create the user
+    * [ ] POST /api/v1/users/add-user
 
 
+* [x] Add a role property to users when created
+    * [x] Role will default to 'user'
+
+* [x] Add an active property to users when created
+    * [x] active will default to 'true'
+
+* [x] Seed the DB with an admin user if not exist yet
+    * [x] Insert user with role 'admin'
+    
+* [x] Restrict GET /api/v1/users to only users with admin
+ role
+    * all users
+
+* [x] Restrict PUT /api/v1/users/:id to only users with admin role
+    * Update a user.
+
+
+* [ ] Restrict POST /api/v1/users to only users with admin role
+    * Create a user
+
+* [ ] Restrict DELETE /api/v1/users to only users with admin role
+    *  Delete a user
+
+* [x] Prevent inactive users from logging in
+
+* [ ] Prevent admin set his active account to false
 
 ### To Do For Deploy Server On Heroku
+------
 * [ ] heroku
 
 ### To Do For Deploy Client On Netlify
+-----
 
 ### To Deploy everything on the same heroku instance
+-----
 * [ ] Move the server package.json to the root of the folder
 * [ ] Update start script for server to be a relative path
 * [ ] post-deploy script that will build reactjs app
 * [ ] Add a static serve to the server that serves '../client/build'
 * [ ] Environment variables for DB connection and token secret
 
-
 ### TESTS [`server`, `client`] Mocha && Jest
+------
 
 * Test each component with jest.
 
 * Test server using Mocha
+
+### Screen shot for the App
+-----

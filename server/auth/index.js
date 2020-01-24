@@ -54,16 +54,25 @@ router.post("/signup", (req, res, next) => {
               }
 
               // create new user
-              const newUser = new User({ username, password: hash });
+              const newUser = new User({ 
+                username, 
+                password: hash, 
+                active: true, 
+                role: 'user' 
+              });
 
               // insert user to db
-              newUser.save();
+              newUser.save().then(user => {
+                user.password = undefined;
+                user.__v = undefined;
 
-              res.status(200).json({
-                message: "Signup is passed!",
-                token,
-                user: newUser
+                res.status(200).json({
+                  message: "Signup is passed.",
+                  token,
+                  user: newUser
+                });
               });
+
             }
           );
         });
@@ -89,7 +98,7 @@ router.post("/login", (req, res, next) => {
       }
 
       // check user is in database
-      if (user) {
+      if (user && user.active) {
         // compare password
         bcrypt.compare(password, user.password).then(result => {
           // if result is true, the password is correct

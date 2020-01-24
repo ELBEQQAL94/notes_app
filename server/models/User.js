@@ -12,6 +12,16 @@ const UserSchema = new Schema({
         type: String,
         require: true
     },
+    active: {
+        type: Boolean
+    },
+    role: {
+        type: String
+    },
+    __v: { 
+        type: Number, 
+        select: false
+    },
     date: {
         type: Date,
         default: Date.now

@@ -3,10 +3,13 @@ const morgan = require('morgan');
 const {notFound, errorHandler} = require('./helpers');
 const auth = require('./auth');
 const notes = require('./api/notes');
+const users = require('./api/users');
 const config = require('config');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { checkTokenSetUser, IsLoogedIn } = require('./auth/middleware');
+const helmet = require('helmet')
+require('./tasks/createAdminUser');
+const { checkTokenSetUser, IsLoogedIn, isAdmin } = require('./auth/middleware');
 
 // init app
 const app = express();
@@ -18,7 +21,8 @@ app.use(express.urlencoded({extended:true})); //Parse URL-encoded bodies
 app.use(cors({
     origini: 'http://localhost:3000'
 }));
-app.use(express.json()); //Used to parse JSON bodies
+app.use(express.json());
+app.use(helmet());
 app.use(checkTokenSetUser);
 
 // routes
@@ -33,6 +37,7 @@ app.get('/', (req, res) => {
 
 app.use('/auth', auth);
 app.use('/api/v1/notes', IsLoogedIn, notes);
+app.use('/api/v1/users', IsLoogedIn, isAdmin, users);
 
 app.use(notFound);
 app.use(errorHandler);
@@ -41,12 +46,15 @@ app.use(errorHandler);
 // connect mongoose to database
 //const db = 'mongodb+srv://ELBEQQAL:fuck0675058801@cluster0-m7kbe.mongodb.net/shoppin-list?retryWrites=true&w=majority'
 const db = config.get('MONGOURI');
+
+mongoose.set('useFindAndModify', false);
 mongoose.connect(
     db, 
     {
         useNewUrlParser: true, 
         useUnifiedTopology:true, 
-        useCreateIndex: true
+        useCreateIndex: true,
+        useFindAndModify: false
     },  
     () => {
     console.log('Mongodb is connected..')

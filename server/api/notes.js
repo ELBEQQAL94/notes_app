@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Note = require('../models/Note');
 const Joi = require('joi');
+const Note = require('../models/Note');
 
 const schema = Joi.object({
     title: Joi.string()
@@ -17,6 +17,7 @@ const schema = Joi.object({
 router.get('/', (req, res, next) => {
 
     Note.find({user_id: req.user._id})
+    .sort({date:-1})
     .then(notes => {
       if(notes.length > 0) {
         res.status(200).json(notes);
