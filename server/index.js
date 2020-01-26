@@ -1,15 +1,15 @@
 const express = require('express');
 const morgan = require('morgan');
 const {notFound, errorHandler} = require('./helpers');
-const auth = require('./auth');
-const notes = require('./api/notes');
-const users = require('./api/users');
+const auth = require('./routes/auth');
+const notes = require('./routes/api/notes');
+const users = require('./routes/api/users');
 const config = require('config');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const helmet = require('helmet')
 require('./tasks/createAdminUser');
-const { checkTokenSetUser, IsLoogedIn, isAdmin } = require('./auth/middleware');
+const { checkTokenSetUser, IsLoogedIn, isAdmin } = require('./routes/auth/middleware');
 
 // init app
 const app = express();

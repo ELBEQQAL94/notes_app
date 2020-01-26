@@ -1,9 +1,7 @@
-const express = require("express");
-const router = express.Router();
 const Joi = require("joi");
-const User = require("../models/User");
+const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
-const { display422, createTokenSendResponse } = require("../helpers");
+const { display422, createTokenSendResponse } = require("../../helpers");
 const config = require("config");
 const jwt = require("jsonwebtoken");
 
@@ -25,7 +23,7 @@ const schema = Joi.object({
 });
 
 // POST /auth/signup
-router.post("/signup", (req, res, next) => {
+exports.signUp = (req, res, next) => {
   const { username, password } = req.body;
 
   const result = Joi.validate(req.body, schema);
@@ -54,11 +52,11 @@ router.post("/signup", (req, res, next) => {
               }
 
               // create new user
-              const newUser = new User({ 
-                username, 
-                password: hash, 
-                active: true, 
-                role: 'user' 
+              const newUser = new User({
+                username,
+                password: hash,
+                active: true,
+                role: "user"
               });
 
               // insert user to db
@@ -72,7 +70,6 @@ router.post("/signup", (req, res, next) => {
                   user: newUser
                 });
               });
-
             }
           );
         });
@@ -83,10 +80,10 @@ router.post("/signup", (req, res, next) => {
     res.status(422);
     next(error);
   }
-});
+};
 
 // POST /auth/signup
-router.post("/login", (req, res, next) => {
+exports.logIn = (req, res, next) => {
   const { username, password } = req.body;
 
   const result = Joi.validate(req.body, schema);
@@ -119,6 +116,4 @@ router.post("/login", (req, res, next) => {
     const error = new Error("Unable to login.");
     next(error);
   }
-});
-
-module.exports = router;
+};

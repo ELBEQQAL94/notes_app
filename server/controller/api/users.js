@@ -1,12 +1,10 @@
-const express = require("express");
-const router = express.Router();
-const User = require("../models/User");
+const User = require("../../models/User");
 const Joi = require("joi");
 const bcrypt = require("bcryptjs");
 
 // Route to list all users
 // GET /api/v1/users
-router.get("/", (req, res, next) => {
+exports.listAllUsers = (req, res, next) => {
   User.find()
     .select("-password")
     .sort({ date: -1 })
@@ -20,7 +18,7 @@ router.get("/", (req, res, next) => {
       }
     })
     .catch(err => next(err));
-});
+};
 
 const schema = Joi.object({
   username: Joi.string()
@@ -36,7 +34,7 @@ const schema = Joi.object({
 
 // Route to update the user
 // PUT /api/v1/users/:id
-router.put("/:id", (req, res, next) => {
+exports.updateUser = (req, res, next) => {
   const { username } = req.body;
   const result = Joi.validate(req.body, schema);
   const { id } = req.params;
@@ -92,6 +90,4 @@ router.put("/:id", (req, res, next) => {
     res.status(422);
     next(error);
   }
-});
-
-module.exports = router;
+};

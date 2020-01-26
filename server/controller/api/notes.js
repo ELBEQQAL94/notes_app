@@ -1,7 +1,5 @@
-const express = require('express');
-const router = express.Router();
 const Joi = require('joi');
-const Note = require('../models/Note');
+const Note = require('../../models/Note');
 
 const schema = Joi.object({
     title: Joi.string()
@@ -14,7 +12,8 @@ const schema = Joi.object({
       .required()
   });
 
-router.get('/', (req, res, next) => {
+// GET all notes
+exports.getNotes = (req, res, next) => {
 
     Note.find({user_id: req.user._id})
     .sort({date:-1})
@@ -31,9 +30,10 @@ router.get('/', (req, res, next) => {
       res.status(422);
       next(error);
     });
-});
+};
 
-router.post('/', (req, res, next) =>{ 
+// create notes
+exports.createNote = (req, res, next) =>{ 
 
     const result = Joi.validate(req.body, schema);
 
@@ -62,6 +62,4 @@ router.post('/', (req, res, next) =>{
         res.status(422);
         next(error);
     };
-});
-
-module.exports = router;
+};
