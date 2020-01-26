@@ -1,23 +1,23 @@
-const User = require("../../models/User");
-const Joi = require("joi");
-const bcrypt = require("bcryptjs");
+const Joi = require('joi');
+const bcrypt = require('bcryptjs');
+const User = require('../../models/User');
 
 // Route to list all users
 // GET /api/v1/users
 exports.listAllUsers = (req, res, next) => {
   User.find()
-    .select("-password")
+    .select('-password')
     .sort({ date: -1 })
-    .then(users => {
+    .then((users) => {
       if (!users) {
         res.json({
-          message: "No Users Found."
+          message: 'No Users Found.',
         });
       } else {
         res.json(users);
       }
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 };
 
 const schema = Joi.object({
@@ -28,8 +28,8 @@ const schema = Joi.object({
   password: Joi.string()
     .trim()
     .min(6),
-  role: Joi.string().valid("user", "admin"),
-  active: Joi.bool()
+  role: Joi.string().valid('user', 'admin'),
+  active: Joi.bool(),
 });
 
 // Route to update the user
@@ -44,19 +44,19 @@ exports.updateUser = (req, res, next) => {
   // validate the req.body
   if (result.error === null) {
     User.findById(id)
-      .then(user => {
+      .then((user) => {
         // if not exists - send 4040 error (with user not found)
         if (!user) {
-          const error = new Error("User Not Found.");
+          const error = new Error('User Not Found.');
           res.status(404);
           next(error);
         } else {
           // check if user enter a username already existe
           // I'am HERE..
-          User.findOne({ username }, async function(err, result) {
-            if (result) {
+          User.findOne({ username }, async (err, data) => {
+            if (data) {
               // if there is a user
-              const error = new Error("This username already token.");
+              const error = new Error('This username already token.');
               res.status(422);
               next(error);
             } else {
@@ -67,23 +67,23 @@ exports.updateUser = (req, res, next) => {
 
               // if valid update the user in db
 
-              let updateUser = await User.findOneAndUpdate(
+              const updateUser = await User.findOneAndUpdate(
                 { _id: id },
                 { $set: req.body },
-                { useFindAndModify: false }
+                { useFindAndModify: false },
               );
 
               updateUser.password = undefined;
 
               res.json({
-                message: "User updated.",
-                updateUser
+                message: 'User updated.',
+                updateUser,
               });
             }
           });
         }
       })
-      .catch(err => console.log(err));
+      .catch((err) => next(err));
   } else {
     // if not valid - send an error with the reason
     const error = new Error(result.error.details[0].message);

@@ -1,14 +1,13 @@
-const Joi = require("joi");
-const User = require("../../models/User");
-const bcrypt = require("bcryptjs");
-const { display422, createTokenSendResponse } = require("../../helpers");
-const config = require("config");
-const jwt = require("jsonwebtoken");
+const Joi = require('joi');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { display422, createTokenSendResponse } = require('../../helpers');
+const User = require('../../models/User');
 
 // secret code
-const secret = config.get("jwtSecrete");
+const secret = process.env.jwtSecrete;
 
-const token_error = "You couldn't create TOKEN.";
+const tokenError = "You couldn't create TOKEN.";
 
 const schema = Joi.object({
   username: Joi.string()
@@ -19,7 +18,7 @@ const schema = Joi.object({
   password: Joi.string()
     .trim()
     .min(6)
-    .required()
+    .required(),
 });
 
 // POST /auth/signup
@@ -29,7 +28,7 @@ exports.signUp = (req, res, next) => {
   const result = Joi.validate(req.body, schema);
 
   if (result.error === null) {
-    User.findOne({ username }, function(err, user) {
+    User.findOne({ username }, (err, user) => {
       if (err) {
         next(err);
       }
@@ -40,15 +39,15 @@ exports.signUp = (req, res, next) => {
       } else {
         // hash password before save it
         // Auto-gen a salt and hash
-        bcrypt.hash(password, 12).then(hash => {
+        bcrypt.hash(password, 12).then((hash) => {
           // create token to new user
           jwt.sign(
             { username, hash },
             secret,
-            { expiresIn: "1d" },
-            (err, token) => {
-              if (err) {
-                display422(res, next, message);
+            { expiresIn: '1d' },
+            (error, token) => {
+              if (error) {
+                display422(res, next, tokenError);
               }
 
               // create new user
@@ -56,21 +55,21 @@ exports.signUp = (req, res, next) => {
                 username,
                 password: hash,
                 active: true,
-                role: "user"
+                role: 'user',
               });
 
               // insert user to db
-              newUser.save().then(user => {
-                user.password = undefined;
-                user.__v = undefined;
+              newUser.save().then((data) => {
+                data.password = undefined;
+                data.__v = undefined;
 
                 res.status(200).json({
-                  message: "Signup is passed.",
+                  message: 'Signup is passed.',
                   token,
-                  user: newUser
+                  user: newUser,
                 });
               });
-            }
+            },
           );
         });
       }
@@ -89,7 +88,7 @@ exports.logIn = (req, res, next) => {
   const result = Joi.validate(req.body, schema);
 
   if (result.error === null) {
-    User.findOne({ username }, function(err, user) {
+    User.findOne({ username }, (err, user) => {
       if (err) {
         next(err);
       }
@@ -97,13 +96,13 @@ exports.logIn = (req, res, next) => {
       // check user is in database
       if (user && user.active) {
         // compare password
-        bcrypt.compare(password, user.password).then(result => {
+        bcrypt.compare(password, user.password).then((data) => {
           // if result is true, the password is correct
-          if (result) {
-            createTokenSendResponse(user, secret, res, next, token_error);
+          if (data) {
+            createTokenSendResponse(user, secret, res, next, tokenError);
           } else {
             // else return error
-            display422(res, next, "Password is incorrect.");
+            display422(res, next, 'Password is incorrect.');
           }
         });
       } else {
@@ -113,7 +112,7 @@ exports.logIn = (req, res, next) => {
     });
   } else {
     res.status(422);
-    const error = new Error("Unable to login.");
+    const error = new Error('Unable to login.');
     next(error);
   }
 };

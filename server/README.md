@@ -110,13 +110,15 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 
 ### Stretch
 ------
-* [ ] In the home page when you SignUp/LogIn, button in the homepage should go to dashboard page.
+* [ ] Testing by mocking redux store
+
+* [x] In the home page when you SignUp/LogIn, button in the homepage should go to dashboard page.
 
 * [ ] Create logo for the app
 
 * [ ] Store TOKEN in cookie
 
-* [ ] Add controller folder and move all routes code on it
+* [x] Add controller folder and move all routes code on it
 
 * [ ] Use redis for cach request from the client
 
@@ -126,13 +128,13 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
     * [ ] Reset with email
     * [ ] Reset by answering security questions
 
-* [ ] Sort notes by date created
+* [x] Sort notes by date created
 
 * [ ] Add redux
 
 * [ ] Create editor for description note.
 
-* [ ] Recreate the header.
+* [ ] Redesign the header.
 
 * [ ] OAuth
     * Login/Signup with google/facebook/twitter/insagrame
@@ -229,9 +231,45 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 ### TESTS [`server`, `client`] Mocha && Jest
 ------
 
-* Test each component with jest.
+## Front End App
 
-* Test server using Mocha
+* [ ] Test each component with jest.
+
+## Back End App
+
+* [x] setup tests:
+    * [x] mocha
+    * [x] chai
+    * [x] supertest 
+    * [x] Create a test db
+* [x] setup linter file
+    * [x] install eslint on devDependencies
+    * [x] run npx eslint --init
+        * [x] check syntax, find problems, and enforce style code
+        * [x] choose commonjs
+        * [x] none of these
+        * [x] No TypeScript
+        * [x] node
+        * [x] use popular style guide
+        * [x] Airbnb
+        * [x] JavaScript
+        * [x] install eslint extension
+        * [x] reloade VScode
+        * [x] add lint script to JSON file
+        * [x] run lint script
+        * [x] run lint --fix to fix the errors
+        * [x] add rules
+        * [x] add environement
+        * [x] add app.test.js file for test the server
+        * [x] add test script using mocha src/ --watch
+        * [ ] test all routes of the app
+* [ ] Create a MVC folder structure
+    * [ ] folder by features
+        * [ ] controller file
+        * [ ] module file for validation and query logic
+        * [ ] routes file for basic descriptions fro express routes
+        * [ ] test file inside for each folder
+* [ ] refactor some routes into middlewares 
 
 ### Screen shot for the App
 -----
