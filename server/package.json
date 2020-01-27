@@ -7,7 +7,7 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "lint": "eslint src/",
-    "test": "mocha src/ --watch"
+    "test": "mocha src/*.test.js src/**/*.test.js --watch"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "gitignore": "^0.6.0",
     "helmet": "^3.21.2",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",

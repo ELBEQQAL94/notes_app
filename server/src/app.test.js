@@ -2,7 +2,7 @@ const request = require('supertest');
 const { expect } = require('chai');
 const app = require('./app');
 
-describe('app', () => {
+describe('App - GET /', () => {
   it('should respond with a message', async () => {
     const response = await request(app)
       .get('/')

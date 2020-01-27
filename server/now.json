@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "name": "auth-from-scratch",
+  "env": {
+    "MONGOURI": "@auth-from-scratch",
+    "jwtSecrete": "@auth-jwt-secret",
+    "DEFAULT_ADMIN_PASSWORD": "@auth-admin-secret"
+  },
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@now/node-server"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "src/index.js"
+    }
+  ],
+  "alias": [
+    "auth-from-scratch"
+  ]
+}

@@ -8,7 +8,7 @@ function notFound(req, res, next) {
 }
 
 // handle errors
-function errorHandler(err, req, res) {
+function errorHandler(err, req, res, next) {
   res.status(req.statusCode || 500);
   res.json({
     message: err.message,
@@ -17,7 +17,7 @@ function errorHandler(err, req, res) {
 }
 
 // display 422 error
-function display422(res, next, message) {
+function showError(res, next, message) {
   res.status(422);
   const error = new Error(message);
   next(error);
@@ -35,7 +35,7 @@ function createTokenSendResponse(user, secret, res, next, message) {
 
   jwt.sign(payload, secret, { expiresIn: '1d' }, (err, token) => {
     if (err) {
-      display422(res, next, message);
+      showError(res, next, message);
     }
 
     res.json({ token });
@@ -45,6 +45,6 @@ function createTokenSendResponse(user, secret, res, next, message) {
 module.exports = {
   notFound,
   errorHandler,
-  display422,
+  showError,
   createTokenSendResponse,
 };

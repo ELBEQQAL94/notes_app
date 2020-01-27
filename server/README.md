@@ -112,6 +112,8 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 ------
 * [ ] Testing by mocking redux store
 
+* [ ] Refactoring controllers to middlewares functions
+
 * [x] In the home page when you SignUp/LogIn, button in the homepage should go to dashboard page.
 
 * [ ] Create logo for the app
@@ -213,9 +215,14 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 
 * [ ] Prevent admin set his active account to false
 
-### To Do For Deploy Server On Heroku
+### To Do For Deploy Server on now
 ------
-* [ ] heroku
+
+* [x] add a secrets using: now secrets add YOUR_SECRET to each env variables
+* [x] In root directory create new file now.json
+* [x] run npx now-config
+* [x] add environement section to now.json file
+* [x] gitignore node
 
 ### To Do For Deploy Client On Netlify
 -----
@@ -263,13 +270,26 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
         * [x] add app.test.js file for test the server
         * [x] add test script using mocha src/ --watch
         * [ ] test all routes of the app
-* [ ] Create a MVC folder structure
-    * [ ] folder by features
-        * [ ] controller file
-        * [ ] module file for validation and query logic
-        * [ ] routes file for basic descriptions fro express routes
-        * [ ] test file inside for each folder
-* [ ] refactor some routes into middlewares 
+* [x] Create a MVC folder structure
+    * [x] folder by features
+        * [x] controller file
+        * [x] model file for validation and query logic
+        * [x] routes file for basic descriptions fro express routes
+        * [x] test file inside for each folder
+* [x] refactor some routes into middlewares 
 
 ### Screen shot for the App
+-----
+
+### Code Review 
+-----
+
+* [ ] Everything is code, i hope that app can live a lot of time LOL.
+
+### Birth Day
+-----
+
+* 27/01/2020
+
+### All Technologies I Used
 -----

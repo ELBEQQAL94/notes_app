@@ -1,5 +1,6 @@
-// const config = require('config');
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
+const schema = require('./auth.schema');
 
 // secret code
 const secret = process.env.jwtSecrete;
@@ -48,4 +49,22 @@ function isAdmin(req, res, next) {
   }
 }
 
-module.exports = { checkTokenSetUser, IsLoogedIn, isAdmin };
+
+const validateUser = (req, res, next) => {
+  const result = Joi.validate(req.body, schema);
+  if (result.error === null) {
+    next();
+  } else {
+    const error = new Error(result.error.details[0].message);
+    res.status(422);
+    next(error);
+  }
+};
+
+
+module.exports = {
+  checkTokenSetUser,
+  IsLoogedIn,
+  isAdmin,
+  validateUser,
+};
