@@ -13,6 +13,7 @@ async function createAdminUser() {
       role: 'admin',
     };
 
+
     User.create(data);
   }
 }

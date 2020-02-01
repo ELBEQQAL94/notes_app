@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PrivateRoutes from './PrivateRoutes';
 import PublicRoutes from './PublicRoutes';
 
-// Public Pages
+// Public Routes
 import Header from "./components/Header";
-import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
-import LogIn from "./pages/LogIn";
+import Home from "./views/Home";
+import SignUp from "./views/SignUp";
+import LogIn from "./views/LogIn";
 
-// Private Pages
-import Dashboard from './pages/Dashboard';
-import Notes from './pages/Notes';
+// Private Routes
+import Dashboard from './views/Dashboard';
+import Notes from './views/Notes';
 
-import PageNotFound from "./pages/PageNotFound";
+import PageNotFound from "./views/PageNotFound";
 
 const Routers = () => {
   return (

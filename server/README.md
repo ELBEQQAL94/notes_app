@@ -65,7 +65,7 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 
 * [x] If non looged in user visits the dashboard, redirect to the login page
 
-* [ ] If logged in show:
+* [x] If logged in show:
 
     * [x] Show Username on Dashboard
 
@@ -110,6 +110,29 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 
 ### Stretch
 ------
+
+* [ ] Add option login or signup on form 
+
+* [ ] show notes under note form not in another route
+
+* [ ] Add five icon 
+
+* [ ] Add validate form using reactstrap
+
+* [ ] Create 404 Page Not Found
+
+* [ ] Refactore button text on the landing page
+
+* [ ] Recreate css style to be friendly with mobile screen
+
+* [ ] Refactor document.title to be dynamic and get the name of the current page
+
+* [ ] Add footer to the app
+
+* [ ] Test the server with fron end
+
+* [ ] prevent get admin account whene GET api/v1/users
+
 * [ ] Testing by mocking redux store
 
 * [ ] Refactoring controllers to middlewares functions
@@ -223,6 +246,23 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 * [x] run npx now-config
 * [x] add environement section to now.json file
 * [x] gitignore node
+[](https://auth-from-scratch-9ntyavbx5.now.sh/)
+
+### To Do For Deploy Server On Heroku
+-----
+
+* [x] Add new app
+* [x] choose name 
+* [x] heroku login
+* [x] cd my-project/
+* [x] git init 
+* [x] heroku git:remote -a auth-from-scratch
+* [x] add env vars on config vars
+* [x] git add .
+* [x] git commit -am "make it better"
+* [x] git push heroku master
+* [x] run command: heroku logs -t for testing the server on POSTMAN
+[](https://auth-from-scratch.herokuapp.com/)
 
 ### To Do For Deploy Client On Netlify
 -----
@@ -235,14 +275,12 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 * [ ] Add a static serve to the server that serves '../client/build'
 * [ ] Environment variables for DB connection and token secret
 
-### TESTS [`server`, `client`] Mocha && Jest
-------
-
-## Front End App
+### Front End App
 
 * [ ] Test each component with jest.
 
-## Back End App
+### Test Back End App [`Mocha, supertest, chai`]
+-------
 
 * [x] setup tests:
     * [x] mocha

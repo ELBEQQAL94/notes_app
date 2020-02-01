@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
-import { checkComparePassword } from "../helpers";
 import ErrorMessage from "../components/ErrorMessage";
 import axios from "axios";
 import { Redirect } from 'react-router-dom';
 import { Spinner } from 'reactstrap';
+import { loginValidate } from '../helpers';
 
-const SIGNUP_URL = "http://localhost:8080/auth/signup";
+//const LOGIN_URL = "http://localhost:8080/auth/login";
+const LOGIN_URL = "https://auth-from-scratch.herokuapp.com/auth/login";
 
-const SignUp = () => {
+const LogIn = () => {
   const [user, setuser] = useState({
     username: "",
     password: "",
-    confirmPassword: ""
   });
 
   const [error, setError] = useState("");
@@ -29,9 +29,9 @@ const SignUp = () => {
     setError("");
   };
 
-  const handleSignUp = e => {
+  const handleLogin = e => {
     e.preventDefault();
-    if (!checkComparePassword(user)) {
+    if (!loginValidate(user)) {
       // send data to server
       const data = {
         username: user.username,
@@ -40,7 +40,7 @@ const SignUp = () => {
       setError("");
       setLoading(true);
       axios
-        .post(SIGNUP_URL, data)
+        .post(LOGIN_URL, data)
         .then(res => {
           // store TOKEN in localStorage
           localStorage.token = res.data.token;
@@ -53,7 +53,7 @@ const SignUp = () => {
         });
     } else {
       // render error
-      setError(checkComparePassword(user));
+      setError(loginValidate(user));
     }
   };
 
@@ -63,9 +63,9 @@ const SignUp = () => {
   return (
     <Container>
       <section className="signup_section">
-        <h1>Sign Up</h1>
+        <h1>Log In</h1>
         <hr />
-        <Form className="signup_form" onSubmit={handleSignUp}>
+        <Form className="signup_form" onSubmit={handleLogin}>
           {error.length > 0 ? <ErrorMessage message={error} /> : null}
           <FormGroup>
             <Label for="username">Username</Label>
@@ -98,23 +98,8 @@ const SignUp = () => {
             </p>
           </FormGroup>
 
-          <FormGroup>
-            <Label for="confirmPassword">Confirm Password</Label>
-            <Input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              placeholder="********"
-              value={user.confirmPassword}
-              onChange={e => handleChange(e)}
-            />
-            <p className="lead">
-              Please repeate your password to make sure you memorize it.
-            </p>
-          </FormGroup>
-
           <Button disabled={loading ? true : false} type="submit" color="primary" className="btn-block">
-            {loading ? <Spinner color="info" /> : 'Sign Up'}
+            {loading ? <Spinner color="info" /> : 'Log In'}
           </Button>
         </Form>
       </section>
@@ -122,4 +107,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default LogIn;
