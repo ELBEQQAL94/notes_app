@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require('joi');
 
 const schema = Joi.object({
   title: Joi.string()
@@ -8,6 +8,6 @@ const schema = Joi.object({
     .required(),
   description: Joi.string()
     .trim()
-    .required()
+    .required(),
 });
 module.exports = schema;

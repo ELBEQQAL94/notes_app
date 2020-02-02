@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require('joi');
 
 const schema = Joi.object({
   username: Joi.string()
@@ -8,8 +8,8 @@ const schema = Joi.object({
   password: Joi.string()
     .trim()
     .min(6),
-  role: Joi.string().valid("user", "admin"),
-  active: Joi.bool()
+  role: Joi.string().valid('user', 'admin'),
+  active: Joi.bool(),
 });
 
 module.exports = schema;

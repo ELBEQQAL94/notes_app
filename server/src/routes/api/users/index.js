@@ -1,8 +1,9 @@
 const express = require('express');
+
 const router = express.Router();
 
 const { listAllUsers, updateUser } = require('../../../controller/api/users');
-const validateUser  = require('./users.middlewares');
+const validateUser = require('./users.middlewares');
 
 // Route to list all users
 // GET /api/v1/users

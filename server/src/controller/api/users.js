@@ -1,24 +1,11 @@
-const bcrypt = require("bcryptjs");
-const User = require("../../models/User");
+const { findUsers, findUserById } = require('./helpers/users');
 
 // Route to list all USERS
 // @admin.route()
 // GET Request /api/v1/users
 // ------------------------------------
 exports.listAllUsers = (req, res, next) => {
-  User.find()
-    .select("-password")
-    .sort({ date: -1 })
-    .then(users => {
-      if (!users) {
-        res.json({
-          message: "No Users Found."
-        });
-      } else {
-        res.json(users);
-      }
-    })
-    .catch(err => next(err));
+  findUsers(res, next);
 };
 
 // Route to update the user
@@ -26,49 +13,5 @@ exports.listAllUsers = (req, res, next) => {
 // Update USER by Request to PUT /api/v1/users/:id
 // ----------------------------------------------
 exports.updateUser = (req, res, next) => {
-  const { username } = req.body;
-  const { id } = req.params;
-  // validate the id params
-  // find the user with the request id
-  // validate the req.body
-  User.findById(id)
-    .then(user => {
-      // if not exists - send 404 error (with user not found)
-      if (!user) {
-        const error = new Error("User Not Found.");
-        res.status(404);
-        next(error);
-      } else {
-        // check if user enter a username already existe
-        // I'am HERE..
-        User.findOne({ username }, async (err, data) => {
-          if (data) {
-            // if there is a user
-            const error = new Error("This username already token.");
-            res.status(422);
-            next(error);
-          } else {
-            // hashed password before insert it to db
-            if (req.body.password) {
-              req.body.password = await bcrypt.hash(req.body.password, 12);
-            }
-
-            // if valid update the user in db
-            const updateUser = await User.findOneAndUpdate(
-              { _id: id },
-              { $set: req.body },
-              { useFindAndModify: false }
-            );
-
-            updateUser.password = undefined;
-
-            res.json({
-              message: "User updated.",
-              updateUser
-            });
-          }
-        });
-      }
-    })
-    .catch(err => next(err));
+  findUserById(req, res, next);
 };

@@ -1,21 +1,23 @@
-const findNotes = require('./helpers');
+const { findNotes } = require('./helpers/notes');
+
+const Note = require('../../models/Note');
 
 // GET All NOTES
 // GET http://localhost:8080/api/v1/notes
 // --------------------------------------
 exports.getNotes = (req, res, next) => {
   const data = { user_id: req.user._id };
-  findNotes(data, res, next);  
+  findNotes(data, res, next);
 };
 
 // Create NOTE
 // POST Request To http://localhost:8080/api/v1/notes
 // -------------------------------------------------
-exports.createNote = (req, res, next) => {
+exports.createNote = (req, res) => {
   const note = {
     ...req.body,
     user_id: req.user._id,
-    username: req.user.username
+    username: req.user.username,
   };
 
   // create new note
@@ -25,7 +27,7 @@ exports.createNote = (req, res, next) => {
   newNote.save();
 
   res.status(200).json({
-    message: "Note is created!",
-    note: newNote
+    message: 'Note is created!',
+    note: newNote,
   });
 };

@@ -63,3 +63,6 @@
 
     * [ ] Show user icon and username in header
 
+## PUSH TO GITHUB
+
+* [ ] Push new changes to github

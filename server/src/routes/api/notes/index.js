@@ -1,8 +1,9 @@
 const express = require('express');
+
 const router = express.Router();
 
 const { getNotes, createNote } = require('../../../controller/api/notes');
-const validateNote  = require('./notes.middlewares');
+const validateNote = require('./notes.middlewares');
 
 
 // GET all notes

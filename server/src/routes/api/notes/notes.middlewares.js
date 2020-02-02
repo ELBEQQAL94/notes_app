@@ -13,5 +13,4 @@ const validateNote = (req, res, next) => {
 };
 
 
-
 module.exports = validateNote;
