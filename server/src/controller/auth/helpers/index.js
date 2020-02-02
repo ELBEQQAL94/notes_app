@@ -11,9 +11,9 @@ const tokenError = "You couldn't create TOKEN.";
 
 
 function findUserIfExists(req, res, next) {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  User.findOne({ username }, (err, user) => {
+  User.findOne({ email }, (err, user) => {
     if (err) {
       next(err);
     }
@@ -32,29 +32,29 @@ function findUserIfExists(req, res, next) {
       });
     } else {
       // user not existe
-      showError(res, next, `${username} Not Found.`);
+      showError(res, next, `${email} Not Found.`);
     }
   });
 }
 
 function createNewUser(req, res, next) {
-  const { username, password } = req.body;
+  const { username, email, password } = req.body;
 
-  User.findOne({ username }, (err, user) => {
+  User.findOne({ email }, (err, user) => {
     if (err) {
       next(err);
     }
 
-    // make username is unique
+    // make email is unique
     if (user) {
-      showError(res, next, `${username} is already token.`);
+      showError(res, next, `${email} is already exists.`);
     } else {
       // hash password before save it
       // Auto-gen a salt and hash
       bcrypt.hash(password, 12).then((hash) => {
         // create token to new user
         jwt.sign(
-          { username, hash },
+          { email, hash },
           secret,
           { expiresIn: '1d' },
           (error, token) => {
@@ -65,6 +65,7 @@ function createNewUser(req, res, next) {
             // create new user
             const newUser = new User({
               username,
+              email,
               password: hash,
               active: true,
               role: 'user',
@@ -76,7 +77,6 @@ function createNewUser(req, res, next) {
               data.__v = undefined;
 
               res.status(200).json({
-                message: 'Signup is passed.',
                 token,
                 user: newUser,
               });

@@ -2,17 +2,48 @@
 -----
 Authentication based on JWT-based to a Node/Express/Mongo app.
 
-### Back End
------
-* http://localhost:8080
-
-### Front End
+### CLIENT
 -----
 * http://localhost:3000
 
-### Authentication:
+    ## Authentication:
+    * [x] If a looged in user visits the signup, or login page, redirect them to "Dashboard"
+    * [x] If non looged in user visits the dashboard, redirect to the login page
+    * [x] If logged in show:
+        * [x] Show Username on Dashboard
+        * [x] after sign up, immediatly login
+        * [x] show log out button in header
+        * [ ] Show user icon and username in header
+    * [x] hidden SignUp and Login link whene user is SignUp/LogIn. just show him ability to logout.
+
+    ## Authorization:
+    ## Administration:
+    ## Requset Data By Client:
+    * [x] List all notes with client
+        * [ ] render description with markdown
+    ## Test Components:
+    * [ ] Test each component with jest.
+
+### SERVER
 -----
-* [x] form-based
+* http://localhost:8080
+
+   ## REST API:
+    * [ ] User:
+        * [ ] username - TEXT
+        * [ ] password - TEXT
+        * [ ] email - TEXT
+        * [ ] date - DATE
+        * [ ] avatar - URL
+    * [ ] Note:
+        * [ ] title - TEXT
+        * [ ] description - TEXT
+        * [ ] username - TEXT
+        * [ ] email - TEXT
+        * [ ] date - DATE
+
+   ## Authentication:
+    * [x] form-based
     * [x] Create server
     * [x] add auth router
     * [x] create data base with mongoDB atlas
@@ -22,7 +53,7 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
     * [x] Create user with POST /auth/signup
         * [x] valid required fields
         * [x] Check if username is unique
-        * [ ] Check if email is unique
+        * [x] Check if email is unique
         * [x] hash password with bcrypt
         * [x] inserto into db 
     * [x] Create landing page
@@ -60,27 +91,8 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
                 * [x] If succesful Log In
                     * [x] Store the TOKEN in localStorage
                     * [x] Redirect To "Dashboard"
-
-* [x] If a looged in user visits the signup, or login page, redirect them to "Dashboard"
-
-* [x] If non looged in user visits the dashboard, redirect to the login page
-
-* [x] If logged in show:
-
-    * [x] Show Username on Dashboard
-
-    * [x] after sign up, immediatly login
-
-    * [x] show log out button in header
-
-    * [ ] Show user icon and username in header
-
-* [x] Have one protected route in the backend
-    * [x] Only looged in user can request this route
-
-### Authorization:
-------
-* [x] visitors can only see the homepage
+    ## Authorization:
+    * [x] visitors can only see the homepage
     * [x] checkTokenSetUser middleware
         * [x] get TOKEN for Authorization header
             * [x] if defined -----
@@ -105,11 +117,85 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
     * [x] Must be logged in
     * [x] Logged in users can request all notes
         * [x] Get all notes in DB with logged in users user_id
-* [x] List all notes with client
-    * [ ] render description with markdown
+
+
+    ## Administration:
+    * [x] Have one protected route in the backend
+        * [x] Only looged in user can request this route
+    * [x] Admin page that lists all users
+    * [x] admin table with user_id
+    * [x] de-activate users
+    * [ ] Admin can see any page on site
+    * [ ] Rate limiting:
+        * [ ] Prevent brute force logins
+        * [ ] Lock out account after too many login attempts
+        * [ ] Add reCaptcha for signup/logins
+    * [ ] verification user email if real: 
+        * [`https://stackoverflow.com/questions/39092822/how-to-do-confirm-email-address-with-express-node`]
+    * [x] Route to list all users
+        * [x] GET /api/v1/users
+    * [x] Route to update the user
+        * [x] PUT /api/v1/users/:id
+    * [ ] Route to delete all users
+        * [ ] DELETE /api/v1/users/:id
+    * [ ] Route to create the user
+        * [ ] POST /api/v1/users/add-user
+    * [x] Add a role property to users when created
+        * [x] Role will default to 'user'
+    * [x] Add an active property to users when created
+        * [x] active will default to 'true'
+    * [x] Seed the DB with an admin user if not exist yet
+        * [x] Insert user with role 'admin'
+    * [x] Restrict GET /api/v1/users to only users with admin role
+        * all users
+    * [x] Restrict PUT /api/v1/users/:id to only users with admin role
+        * Update a user.
+    * [ ] Restrict POST /api/v1/users to only users with admin role
+        * Create a user
+    * [ ] Restrict DELETE /api/v1/users to only users with admin role
+        *  Delete a user
+    * [x] Prevent inactive users from logging in
+    * [ ] Prevent admin set his active account to false
+
+    ## Test Back End App [`Mocha, supertest, chai`]:
+    * [x] setup tests:
+        * [x] mocha
+        * [x] chai
+        * [x] supertest 
+        * [x] Create a test db
+    * [x] setup linter file
+    * [x] install eslint on devDependencies
+    * [x] run npx eslint --init
+        * [x] check syntax, find problems, and enforce style code
+        * [x] choose commonjs
+        * [x] none of these
+        * [x] No TypeScript
+        * [x] node
+        * [x] use popular style guide
+        * [x] Airbnb
+        * [x] JavaScript
+        * [x] install eslint extension
+        * [x] reloade VScode
+        * [x] add lint script to JSON file
+        * [x] run lint script
+        * [x] run lint --fix to fix the errors
+        * [x] add rules
+        * [x] add environement
+        * [x] add app.test.js file for test the server
+        * [x] add test script using mocha src/ --watch
+        * [ ] test all routes of the app
+    * [x] Create a MVC folder structure
+        * [x] folder by features
+            * [x] controller file
+            * [x] model file for validation and query logic
+            * [x] routes file for basic descriptions fro express routes
+            * [x] test file inside for each folder
+    * [x] refactor some routes into middlewares 
 
 ### Stretch
 ------
+
+* [ ] Documented SERVER Folder root and CLIENT Folder root.
 
 * [ ] Add option login or signup on form 
 
@@ -176,68 +262,6 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 * [ ] Add status 200 to all successful response
 * [ ] Refactore the error message
 
-### Admin page:
-------
-
-* [ ] Admin page that lists all users
-    * [ ] admin table with user_id
-    * [ ] de-activate users
-
-* [ ] Admin can see any page on site
-
-* [ ] Rate limiting
-    * [ ] Prevent brute force logins
-    * [ ] Lock out account after too many login attempts
-    * [ ] Add reCaptcha for signup/logins
-
-* [ ] verification user email if real: 
-    [`https://stackoverflow.com/questions/39092822/how-to-do-confirm-email-address-with-express-node`]
-
-* [x] hidden SignUp and Login link whene user is SignUp/LogIn. just show him ability to logout.
-
-### BACKEND ADMINISTRATION
-------
-
-* [x] Route to list all users
-    * [x] GET /api/v1/users
-
-* [x] Route to update the user
-    * [x] PUT /api/v1/users/:id
-
-* [ ] Route to delete all users
-    * [ ] DELETE /api/v1/users/:id
-
-* [ ] Route to create the user
-    * [ ] POST /api/v1/users/add-user
-
-
-* [x] Add a role property to users when created
-    * [x] Role will default to 'user'
-
-* [x] Add an active property to users when created
-    * [x] active will default to 'true'
-
-* [x] Seed the DB with an admin user if not exist yet
-    * [x] Insert user with role 'admin'
-    
-* [x] Restrict GET /api/v1/users to only users with admin
- role
-    * all users
-
-* [x] Restrict PUT /api/v1/users/:id to only users with admin role
-    * Update a user.
-
-
-* [ ] Restrict POST /api/v1/users to only users with admin role
-    * Create a user
-
-* [ ] Restrict DELETE /api/v1/users to only users with admin role
-    *  Delete a user
-
-* [x] Prevent inactive users from logging in
-
-* [ ] Prevent admin set his active account to false
-
 ### To Do For Deploy Server on now
 ------
 
@@ -275,46 +299,6 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 * [ ] Add a static serve to the server that serves '../client/build'
 * [ ] Environment variables for DB connection and token secret
 
-### Front End App
-
-* [ ] Test each component with jest.
-
-### Test Back End App [`Mocha, supertest, chai`]
--------
-
-* [x] setup tests:
-    * [x] mocha
-    * [x] chai
-    * [x] supertest 
-    * [x] Create a test db
-* [x] setup linter file
-    * [x] install eslint on devDependencies
-    * [x] run npx eslint --init
-        * [x] check syntax, find problems, and enforce style code
-        * [x] choose commonjs
-        * [x] none of these
-        * [x] No TypeScript
-        * [x] node
-        * [x] use popular style guide
-        * [x] Airbnb
-        * [x] JavaScript
-        * [x] install eslint extension
-        * [x] reloade VScode
-        * [x] add lint script to JSON file
-        * [x] run lint script
-        * [x] run lint --fix to fix the errors
-        * [x] add rules
-        * [x] add environement
-        * [x] add app.test.js file for test the server
-        * [x] add test script using mocha src/ --watch
-        * [ ] test all routes of the app
-* [x] Create a MVC folder structure
-    * [x] folder by features
-        * [x] controller file
-        * [x] model file for validation and query logic
-        * [x] routes file for basic descriptions fro express routes
-        * [x] test file inside for each folder
-* [x] refactor some routes into middlewares 
 
 ### Screen shot for the App
 -----
@@ -329,5 +313,5 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
 
 * 27/01/2020
 
-### All Technologies I Used
+### All Technologies I Used In This Project
 -----

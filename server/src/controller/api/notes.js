@@ -17,7 +17,7 @@ exports.createNote = (req, res) => {
   const note = {
     ...req.body,
     user_id: req.user._id,
-    username: req.user.username,
+    email: req.user.email,
   };
 
   // create new note

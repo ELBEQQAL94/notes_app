@@ -2,23 +2,16 @@ const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
 
+const requiredString = {
+  type: String,
+  require: true,
+};
+
 const NoteSchema = new Schema({
-  title: {
-    type: String,
-    require: true,
-  },
-  description: {
-    type: String,
-    require: true,
-  },
-  username: {
-    type: String,
-    require: true,
-  },
-  user_id: {
-    type: String,
-    require: true,
-  },
+  title: requiredString,
+  description: requiredString,
+  email: requiredString,
+  user_id: requiredString,
   __v: {
     type: Number,
     select: false,

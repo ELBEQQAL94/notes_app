@@ -8,11 +8,12 @@ function notFound(req, res, next) {
 }
 
 // handle errors
+// eslint-disable-next-line no-unused-vars
 function errorHandler(err, req, res, next) {
   res.status(req.statusCode || 500);
   res.json({
     message: err.message,
-    stack: err.stack,
+    stack: process.env.NODE_ENV === 'production' ? '' : err.stack,
   });
 }
 
@@ -29,7 +30,7 @@ function createTokenSendResponse(user, secret, res, next, message) {
   // create token for user
   const payload = {
     _id: user._id,
-    username: user.username,
+    email: user.email,
     role: user.role,
   };
 

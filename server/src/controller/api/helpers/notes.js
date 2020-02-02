@@ -1,6 +1,7 @@
 const Note = require('../../../models/Note');
 
 const findNotes = (data, res, next) => Note.find(data)
+  .select('-email')
   .sort({ date: -1 })
   .then((notes) => {
     if (notes.length > 0) {

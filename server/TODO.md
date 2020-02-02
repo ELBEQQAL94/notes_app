@@ -18,13 +18,32 @@
 
 * [x] Refactor notes routes
 
-* [ ] Refactor users routes
+* [x] Add NODE_ENV
 
-* [ ] Check if email is unique
+* [x] Set repted schema in var
 
-* [ ] Allow username to be not unique, and allow _ to be in the username string
+* [x] Allow unused vars in eslint
 
-* [ ] Check email in db
+* [x] Refactor users routes
+
+* [x] Check if email is unique
+    * [x] check invalid email
+    * [x] check empty field for email form
+    * [x] replace username with email
+    * [x] validate email
+    * [x] display error
+* [x] Add username
+    * [x] Add username to the schema
+    * [x] Add username to admin object
+    * [x] Add username to schema validate
+    * [x] Check invalid username
+    * [x] Allow username with underscore
+    * [x] check empty field for username form
+    * [x] validate username
+    * [x] display error if username invalid
+    * [x] test for username
+
+* [x] Check email in db
 
 * [ ] prevent get admin account whene GET api/v1/users
 
@@ -48,6 +67,11 @@
 * [ ] Test users.test
 
 ## Front End
+
+* [ ] Change username to be email
+
+* [ ] validate email in schema and display error
+    * If there is invalid email
 
 * [ ] Test the server with the front end
 

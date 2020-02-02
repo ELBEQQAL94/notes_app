@@ -7,7 +7,8 @@ async function createAdminUser() {
 
   if (!user) {
     const data = {
-      username: 'Admin',
+      email: process.env.DEFAULT_ADMIN_EMAIL,
+      username: process.env.DEFAULT_ADMIN_USERNAME,
       password: await bcrypt.hash(process.env.DEFAULT_ADMIN_PASSWORD, 12),
       active: true,
       role: 'admin',

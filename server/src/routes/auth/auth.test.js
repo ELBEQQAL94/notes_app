@@ -12,23 +12,31 @@ describe('GET /auth', () => {
 });
 
 describe('POST /auth/signup', () => {
-  it('should require a username', async () => {
+  it('should require an email', async () => {
     const response = await request(app)
       .post('/auth/signup')
       .send({})
+      .expect(500);
+    expect(response.body.message).to.equal('"email" is required');
+  });
+  it('should require a username', async () => {
+    const response = await request(app)
+      .post('/auth/signup')
+      .send({ email: 'jamal@gmail.com' })
       .expect(500);
     expect(response.body.message).to.equal('"username" is required');
   });
   it('should require a password', async () => {
     const response = await request(app)
       .post('/auth/signup')
-      .send({ username: 'jamal' })
+      .send({ email: 'jamal@gmail.com', username: 'jamal' })
       .expect(500);
     expect(response.body.message).to.equal('"password" is required');
   });
   it('should create a new user', () => {
     const newUser = {
       username: 'safad',
+      email: 'safad@gmail.com',
       password: 'password',
     };
     request(app)
@@ -39,9 +47,10 @@ describe('POST /auth/signup', () => {
         expect(response.body).to.equal({});
       });
   });
-  it('should not allow a user with existing username', () => {
+  it('should not allow a user with existing email', () => {
     const newUser = {
       username: 'safad',
+      email: 'safad@gmail.com',
       password: 'password',
     };
     request(app)
@@ -49,30 +58,30 @@ describe('POST /auth/signup', () => {
       .send(newUser)
       .expect(500)
       .then((response) => {
-        expect(response.body).to.equal('That username is unique, please shoose another one.');
+        expect(response.body).to.equal('That email is unique, please shoose another one.');
       });
   });
 });
 
 
 describe('POST /auth/login', () => {
-  it('should require a username', async () => {
+  it('should require an email', async () => {
     const response = await request(app)
       .post('/auth/login')
       .send({})
       .expect(500);
-    expect(response.body.message).to.equal('"username" is required');
+    expect(response.body.message).to.equal('"email" is required');
   });
   it('should require a password', async () => {
     const response = await request(app)
       .post('/auth/login')
-      .send({ username: 'jamal' })
+      .send({ email: 'jamal@gmail.com' })
       .expect(500);
     expect(response.body.message).to.equal('"password" is required');
   });
   it('should only allow valid users to login', () => {
     const user = {
-      username: 'jama',
+      email: 'kamal@gmail.com',
       password: 'password',
     };
     request(app)
@@ -85,7 +94,7 @@ describe('POST /auth/login', () => {
   });
   it('should login a user', () => {
     const newUser = {
-      username: 'safad',
+      email: 'safad@gmail.com',
       password: 'password',
     };
     request(app)

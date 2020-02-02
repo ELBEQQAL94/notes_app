@@ -19,7 +19,7 @@ function findUsers(res, next) {
 }
 
 function findUserById(req, res, next) {
-  const { username } = req.body;
+  const { email } = req.body;
   const { id } = req.params;
   // validate the id params
   // find the user with the request id
@@ -32,12 +32,12 @@ function findUserById(req, res, next) {
         res.status(404);
         next(error);
       } else {
-        // check if user enter a username already existe
+        // check if user enter a email already existe
         // I'am HERE..
-        User.findOne({ username }, async (err, data) => {
+        User.findOne({ email }, async (err, data) => {
           if (data) {
             // if there is a user
-            const error = new Error('This username already token.');
+            const error = new Error('This email already token.');
             res.status(422);
             next(error);
           } else {
