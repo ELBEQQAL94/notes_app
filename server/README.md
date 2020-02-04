@@ -1,12 +1,15 @@
 ### Description
 -----
-Authentication based on JWT-based to a Node/Express/Mongo app.
+This app based on reminder poeple to todo lists or notes.
+
+### TODO LISTS:
+-----
 
 ### CLIENT
 -----
 * http://localhost:3000
 
-    ## Authentication:
+    ## Authentication:are you who you say you are?
     * [x] If a looged in user visits the signup, or login page, redirect them to "Dashboard"
     * [x] If non looged in user visits the dashboard, redirect to the login page
     * [x] If logged in show:
@@ -16,7 +19,7 @@ Authentication based on JWT-based to a Node/Express/Mongo app.
         * [ ] Show user icon and username in header
     * [x] hidden SignUp and Login link whene user is SignUp/LogIn. just show him ability to logout.
 
-    ## Authorization:
+    ## Authorization:are you allowed to be here?
     ## Administration:
     ## Requset Data By Client:
     * [x] List all notes with client

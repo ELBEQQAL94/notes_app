@@ -20,6 +20,8 @@
 
 * [x] Add NODE_ENV
 
+* [x] Add CORS to env file
+
 * [x] Set repted schema in var
 
 * [x] Allow unused vars in eslint
@@ -45,30 +47,31 @@
 
 * [x] Check email in db
 
-* [ ] prevent get admin account whene GET api/v1/users
+* [x] prevent get admin account whene request to GET api/v1/users
 
-* [ ] Refactoring controllers to middlewares functions
+* [x] Refactoring controllers to middlewares functions
 
-* [ ] Create logo for the app
-
-* [ ] Store TOKEN in cookie
-
-* [ ] Create editor for description note.
-
-* [ ] Redesign the header.
+* [x] Store TOKEN in cookie
+    * [](https://www.youtube.com/watch?v=USNwvB5o63U)
 
 * [ ] OAuth
     * Login/Signup with google/facebook/twitter/insagrame
 
-* [ ] Tests new routes and check code style format
+* [x] Tests new routes and check code style format
 
-* [ ] Test note.test
+* [x] Test notes.test
 
-* [ ] Test users.test
+* [x] admin routes
+
+* [ ] Add notes to each user
+
+* [ ] change status code for unauth from 500 to 401
 
 ## Front End
 
-* [ ] Change username to be email
+* [ ] Add email form
+    * [ ] Add validate email
+    * [ ] Display error if invalid email
 
 * [ ] validate email in schema and display error
     * If there is invalid email
@@ -86,7 +89,8 @@
     * [ ] Show Username on Dashboard
 
     * [ ] Show user icon and username in header
+* [ ] Create logo for the app
 
-## PUSH TO GITHUB
+* [ ] Create editor for description note.
 
-* [ ] Push new changes to github
+* [ ] Redesign the header.

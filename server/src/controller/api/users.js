@@ -5,7 +5,7 @@ const { findUsers, findUserById } = require('./helpers/users');
 // GET Request /api/v1/users
 // ------------------------------------
 exports.listAllUsers = (req, res, next) => {
-  findUsers(res, next);
+  findUsers(req, res, next);
 };
 
 // Route to update the user

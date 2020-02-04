@@ -7,6 +7,11 @@ const requiredString = {
   require: true,
 };
 
+const requiredDate = {
+  type: Date,
+  default: Date.now,
+};
+
 const NoteSchema = new Schema({
   title: requiredString,
   description: requiredString,
@@ -16,10 +21,10 @@ const NoteSchema = new Schema({
     type: Number,
     select: false,
   },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
+  createdAt: requiredDate,
+  updatedAt: requiredDate,
+}, {
+  timestamps: true,
 });
 
 module.exports = model('Note', NoteSchema);

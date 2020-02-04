@@ -7,10 +7,12 @@ const validateUser = require('./users.middlewares');
 
 // Route to list all users
 // GET /api/v1/users
+// @admin route
 router.get('/', listAllUsers);
 
 // Route to update the user
 // PUT /api/v1/users/:id
+// @admin route
 router.put('/:id', validateUser, updateUser);
 
 

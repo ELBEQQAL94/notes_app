@@ -17,7 +17,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({ origini: 'http://localhost:3000' }));
+app.use(cors({ origini: process.env.CORS_ORIGIN }));
 app.use(express.json());
 app.use(helmet());
 app.use(checkTokenSetUser);
@@ -33,7 +33,8 @@ app.get('/', (req, res) => {
 
 
 app.use('/auth', auth);
-app.use('/api/v1/notes', IsLoogedIn, notes);
+// app.use('/api/v1/notes', IsLoogedIn, notes);
+app.use('/user/notes', IsLoogedIn, notes);
 app.use('/api/v1/users', IsLoogedIn, isAdmin, users);
 
 app.use(notFound);

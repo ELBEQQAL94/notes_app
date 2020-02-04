@@ -7,6 +7,11 @@ const requiredString = {
   require: true,
 };
 
+const requiredDate = {
+  type: Date,
+  default: Date.now,
+};
+
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -23,10 +28,10 @@ const UserSchema = new Schema({
     type: Number,
     select: false,
   },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
+  createdAt: requiredDate,
+  updatedAt: requiredDate,
+}, {
+  timestamps: true,
 });
 
 module.exports = model('User', UserSchema);

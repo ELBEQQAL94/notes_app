@@ -62,6 +62,12 @@ function createNewUser(req, res, next) {
               showError(res, next, tokenError);
             }
 
+            // res.cookie('access_token', token, {
+            //   maxAge: 86400,
+            //   httpOnly: true,
+            //   // secure: true
+            // });
+
             // create new user
             const newUser = new User({
               username,

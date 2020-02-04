@@ -39,8 +39,18 @@ function createTokenSendResponse(user, secret, res, next, message) {
       showError(res, next, message);
     }
 
+    // res.cookie('access_token', token, {
+    //   maxAge: 86400,
+    //   httpOnly: true,
+    //   // secure: true
+    // });
+
     res.json({ token });
   });
+}
+
+function getUsersWithoutAdminAccount(users, email) {
+  return users.filter((user) => user.email !== email);
 }
 
 module.exports = {
@@ -48,4 +58,5 @@ module.exports = {
   errorHandler,
   showError,
   createTokenSendResponse,
+  getUsersWithoutAdminAccount,
 };

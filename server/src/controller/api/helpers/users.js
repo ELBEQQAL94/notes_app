@@ -2,7 +2,10 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../../../models/User');
 
-function findUsers(res, next) {
+const { getUsersWithoutAdminAccount } = require('../../../helpers');
+
+function findUsers(req, res, next) {
+  const { email } = req.user;
   return User.find()
     .select('-password')
     .sort({ date: -1 })
@@ -12,7 +15,11 @@ function findUsers(res, next) {
           message: 'No Users Found.',
         });
       } else {
-        res.json(users);
+        // return all users without admin account
+        users = getUsersWithoutAdminAccount(users, email);
+        res.json({
+          users,
+        });
       }
     })
     .catch((err) => next(err));
